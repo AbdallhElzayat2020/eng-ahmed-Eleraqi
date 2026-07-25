@@ -161,3 +161,27 @@ document.querySelectorAll('.navbar a, .mobile-menu a').forEach((link) => {
         }
     });
 });
+
+// =============================================================
+// 10. (Back to Top)
+// =============================================================
+const backToTop = document.getElementById('backToTop');
+
+if (backToTop) {
+  // ====== إظهار/إخفاء الزر عند التمرير ======
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  });
+
+  // ====== العودة للأعلى عند الضغط ======
+  backToTop.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}

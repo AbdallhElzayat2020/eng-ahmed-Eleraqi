@@ -1960,3 +1960,366 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* ============================================================ */
+/* ====== FLOATING BUTTONS (أزرار عائمة) ====== */
+/* ============================================================ */
+
+.float-btn {
+    position: fixed;
+    z-index: 999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: none;
+    cursor: pointer;
+}
+
+/* ====== زر الهاتف ====== */
+.float-phone {
+    bottom: 120px;
+    left: 20px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.float-phone:hover {
+    transform: scale(1.12) rotate(-5deg);
+    box-shadow: 0 12px 40px rgba(76, 175, 80, 0.4);
+}
+
+/* ====== زر الواتساب ====== */
+.float-whatsapp {
+    bottom: 50px;
+    left: 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.float-whatsapp:hover {
+    transform: scale(1.12) rotate(5deg);
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
+}
+
+/* ====== تأثير النبض ====== */
+.float-btn::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    animation: pulseRing 2s ease-in-out infinite;
+}
+
+.float-phone::before {
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.float-whatsapp::before {
+    border-color: rgba(37, 211, 102, 0.3);
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* ====== أداة التلميح (Tooltip) ====== */
+.float-tooltip {
+    position: absolute;
+    right: 75px;
+    background: rgba(10, 10, 18, 0.9);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.float-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right: 6px solid rgba(10, 10, 18, 0.9);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.float-btn:hover .float-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* ============================================================ */
+/* ====== RESPONSIVE - الأزرار العائمة ====== */
+/* ============================================================ */
+
+@media (max-width: 767px) {
+    .float-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .float-phone {
+        bottom: 100px;
+        left: 12px;
+    }
+
+    .float-whatsapp {
+        bottom: 40px;
+        left: 12px;
+    }
+
+    .float-tooltip {
+        display: none;
+    }
+
+    .float-btn::before {
+        inset: -4px;
+    }
+}
+
+@media (max-width: 400px) {
+    .float-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    .float-phone {
+        bottom: 85px;
+        left: 10px;
+    }
+
+    .float-whatsapp {
+        bottom: 32px;
+        left: 10px;
+    }
+}
+
+/* ====== للموبايل - إخفاء الأزرار في بعض الصفحات ====== */
+@media (max-width: 767px) {
+    .float-btn {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* ============================================================ */
+/* ====== BACK TO TOP (العودة للأعلى) ====== */
+/* ============================================================ */
+
+.back-to-top {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    z-index: 998;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9a87c, #a8895e);
+    color: #0a0a12;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 8px 30px rgba(201, 168, 124, 0.3);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    font-family: 'Cairo', sans-serif;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 40px rgba(201, 168, 124, 0.4);
+    background: linear-gradient(135deg, #d4b88c, #b8956a);
+}
+
+.back-to-top:active {
+    transform: scale(0.95);
+}
+
+/* ====== النص داخل الزر ====== */
+.back-to-top i {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.back-to-top-text {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+/* ====== تأثير النبض ====== */
+.back-to-top::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 168, 124, 0.2);
+    animation: pulseTop 2s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.back-to-top.show::before {
+    opacity: 1;
+}
+
+@keyframes pulseTop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ====== أداة التلميح (Tooltip) ====== */
+.back-to-top-tooltip {
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(10, 10, 18, 0.9);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(10px);
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.back-to-top-tooltip::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 6px solid rgba(10, 10, 18, 0.9);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.back-to-top:hover .back-to-top-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* ============================================================ */
+/* ====== RESPONSIVE - زر العودة للأعلى ====== */
+/* ============================================================ */
+
+@media (max-width: 1023px) {
+    .back-to-top {
+        bottom: 130px;
+        right: 16px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+
+    .back-to-top i {
+        font-size: 1rem;
+    }
+
+    .back-to-top-text {
+        font-size: 0.45rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .back-to-top {
+        bottom: 110px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+
+    .back-to-top i {
+        font-size: 0.9rem;
+    }
+
+    .back-to-top-text {
+        font-size: 0.4rem;
+    }
+
+    .back-to-top-tooltip {
+        display: none;
+    }
+
+    .back-to-top::before {
+        inset: -3px;
+    }
+}
+
+@media (max-width: 400px) {
+    .back-to-top {
+        bottom: 95px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .back-to-top i {
+        font-size: 0.8rem;
+    }
+
+    .back-to-top-text {
+        font-size: 0.35rem;
+    }
+}
