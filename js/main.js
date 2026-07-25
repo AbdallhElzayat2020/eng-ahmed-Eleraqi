@@ -1,5 +1,5 @@
 // =============================================================
-// 1. تفعيل AOS
+// 1.  AOS
 // =============================================================
 AOS.init({
     once: true,
@@ -8,7 +8,7 @@ AOS.init({
 });
 
 // =============================================================
-// 2. هامبورجر
+// 2.Hamburger Menu
 // =============================================================
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -28,7 +28,7 @@ if (hamburger && mobileMenu) {
 }
 
 // =============================================================
-// 3. عدادات متحركة
+// 3. Scroll to Top Button
 // =============================================================
 let countersStarted = false;
 
@@ -69,77 +69,6 @@ if (aboutSection) {
     );
     observer.observe(aboutSection);
 }
-
-// =============================================================
-// 4. شهادات العملاء (كاروسيل)
-// =============================================================
-let currentSlide = 0;
-const track = document.getElementById('testimonialsTrack');
-const dots = document.querySelectorAll('.slider-dot');
-const totalSlides = document.querySelectorAll('.testimonial-card').length;
-let slidesToShow = 3;
-let autoSlideInterval;
-
-function getSlidesToShow() {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1024) return 2;
-    return 3;
-}
-
-function updateSlider() {
-    if (!track) return;
-    slidesToShow = getSlidesToShow();
-    const slideWidth = 100 / slidesToShow;
-    const maxSlide = Math.max(0, totalSlides - slidesToShow);
-
-    document.querySelectorAll('.testimonial-card').forEach((card) => {
-        card.style.minWidth = `calc(${slideWidth}% - 1rem)`;
-    });
-
-    if (currentSlide > maxSlide) currentSlide = maxSlide;
-    track.style.transform = `translateX(${currentSlide * slideWidth}%)`;
-
-    dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
-
-function slideTestimonials(direction) {
-    const maxSlide = Math.max(0, totalSlides - slidesToShow);
-    currentSlide = Math.max(0, Math.min(maxSlide, currentSlide + direction));
-    updateSlider();
-    resetAutoSlide();
-}
-
-function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(() => {
-        const maxSlide = Math.max(0, totalSlides - slidesToShow);
-        if (currentSlide >= maxSlide) {
-            currentSlide = 0;
-        } else {
-            currentSlide++;
-        }
-        updateSlider();
-    }, 5000);
-}
-
-dots.forEach((dot) => {
-    dot.addEventListener('click', function () {
-        currentSlide = parseInt(this.dataset.index);
-        updateSlider();
-        resetAutoSlide();
-    });
-});
-
-window.addEventListener('load', () => {
-    updateSlider();
-    resetAutoSlide();
-});
-
-window.addEventListener('resize', () => {
-    updateSlider();
-});
 
 // =============================================================
 // 5. Lightbox
